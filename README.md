@@ -31,6 +31,7 @@
   - [Trademarks](#trademarks)
   - [Code of Conduct](#code-of-conduct)
   - [Reporting security issues](#reporting-security-issues)
+  - [Prompt engineering](#prompt-engineering)
 
 
 [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=601652366&machine=basicLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json&location=eastus)
@@ -194,3 +195,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 For security concerns, please see [Security Guidelines](./SECURITY.md)
 
+### Prompt Engineering
+
+To engineer prompt - access app\backend\approaches\chatreadretrieveread.py
