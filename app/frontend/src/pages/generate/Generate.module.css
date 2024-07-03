@@ -1,0 +1,20 @@
+/* Add this CSS to your stylesheet */
+.input-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  
+  .input-grid input {
+    flex: 1 1 50%;
+    /* Adjust padding, margins, and max-width as needed */
+  }
+  
+  .flex-input {
+    display: flex;
+    /* Add additional styling as needed */
+  }
+  
+  button {
+    /* Style your button as needed */
+  }

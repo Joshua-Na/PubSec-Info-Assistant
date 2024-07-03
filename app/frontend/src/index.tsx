@@ -14,6 +14,7 @@ import Chat from "./pages/chat/Chat";
 import Content from "./pages/content/Content";
 import Tutor from "./pages/tutor/Tutor";
 import { Tda } from "./pages/tda/Tda";
+import Generate from "./pages/generate/Generate";
 
 initializeIcons();
 
@@ -28,6 +29,7 @@ export default function App() {
                     <Route path="*" element={<NoPage />} />
                     <Route path="tutor" element={<Tutor />} />
                     <Route path="tda" element={<Tda folderPath={""} tags={[]} />} />
+                    <Route path="generate" element={<Generate />} />
             </Route>
             </Routes>
         </HashRouter>    

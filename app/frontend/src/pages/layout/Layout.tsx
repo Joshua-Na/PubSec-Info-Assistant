@@ -47,6 +47,11 @@ export const Layout = () => {
                                     Manage Content
                                 </NavLink>
                             </li>
+                            <li className={styles.headerNavLeftMargin}>
+                                <NavLink to="/generate" className={({ isActive }) => (isActive ? styles.headerNavPageLinkActive : styles.headerNavPageLink)}>
+                                    TCOT Generator
+                                </NavLink>
+                            </li>
                             {featureFlags?.ENABLE_MATH_ASSISTANT &&
                                 <li className={styles.headerNavLeftMargin}>
                                     <NavLink to="/tutor" className={({ isActive }) => (isActive ? styles.headerNavPageLinkActive : styles.headerNavPageLink)}>

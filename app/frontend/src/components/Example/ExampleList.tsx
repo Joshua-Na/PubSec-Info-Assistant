@@ -11,9 +11,9 @@ export type ExampleModel = {
 };
 
 const EXAMPLES: ExampleModel[] = [
-    { text: "Are there any radio telescopes in Australia?", value: "Are there any radio telescopes in Australia?" },
-    { text: "What are Microsoft's primary sources of revenue?", value: "What are Microsoft's primary sources of revenue?" },
-    { text: "What are some flavors of Breyers?", value: "What are some flavors of Breyers?" }
+    { text: "Find Standard clauses for PPVC requirement", value: "Find Standard clauses for PPVC requirement" },
+    { text: "List public space related requirements in Residential TCOTs", value: "List public space related requirements in Residential TCOTs" },
+    { text: "List all TCOTs with DAP requirement", value: "List all TCOTs with DAP requirement" }
 ];
 
 interface Props {

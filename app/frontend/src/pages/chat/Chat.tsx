@@ -6,6 +6,7 @@ import { Checkbox, Panel, DefaultButton, TextField, SpinButton, Separator, Toggl
 import Switch from 'react-switch';
 import { GlobeFilled, BuildingMultipleFilled, AddFilled, ChatSparkleFilled } from "@fluentui/react-icons";
 import { ITag } from '@fluentui/react/lib/Pickers';
+import uraLogo from "../../assets/uralogo.png";
 
 import styles from "./Chat.module.css";
 import rlbgstyles from "../../components/ResponseLengthButtonGroup/ResponseLengthButtonGroup.module.css";
@@ -352,15 +353,25 @@ const Chat = () => {
                         <div className={styles.chatEmptyState}>
                             {activeChatMode == ChatMode.WorkOnly ? 
                                 <div>
-                                    <div className={styles.chatEmptyStateHeader}> 
-                                        <BuildingMultipleFilled fontSize={"100px"} primaryFill={"rgba(27, 74, 239, 1)"} aria-hidden="true" aria-label="Chat with your Work Data logo" />
+                                    <div className={styles.chatEmptyStateHeader}>
+                                        <img 
+                                            src={uraLogo} 
+                                            alt="URA Logo" 
+                                            aria-hidden="true" 
+                                            aria-label="Chat with your Work Data logo" 
+                                        /> 
                                         </div>
-                                    <h1 className={styles.chatEmptyStateTitle}>Chat with your work data</h1>
+                                    <h1 className={styles.chatEmptyStateTitle}>Chat with your past TCOTs!</h1>
                                 </div>
                             : activeChatMode == ChatMode.WorkPlusWeb ?
                                 <div>
                                     <div className={styles.chatEmptyStateHeader}> 
-                                        <BuildingMultipleFilled fontSize={"80px"} primaryFill={"rgba(27, 74, 239, 1)"} aria-hidden="true" aria-label="Chat with your Work and Web Data logo" /><AddFilled fontSize={"50px"} primaryFill={"rgba(0, 0, 0, 0.7)"} aria-hidden="true" aria-label=""/><GlobeFilled fontSize={"80px"} primaryFill={"rgba(24, 141, 69, 1)"} aria-hidden="true" aria-label="" />
+                                    <img 
+                                            src={uraLogo} 
+                                            alt="URA Logo" 
+                                            aria-hidden="true" 
+                                            aria-label="Chat with your Work Data logo" 
+                                        /> 
                                     </div>
                                     <h1 className={styles.chatEmptyStateTitle}>Chat with your work and web data</h1>
                                 </div>
