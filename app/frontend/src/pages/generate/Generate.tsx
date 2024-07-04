@@ -124,7 +124,7 @@ const Generate = () => {
     };
 
     const downloadDocx = () => {
-        const paragraphs = textFieldValue.split('\n').map(line => new Paragraph({
+        const paragraphs = textFieldValue.split('\n').map((line: string) => new Paragraph({
             children: [new TextRun(line)],
         }));
 
@@ -202,7 +202,7 @@ const Generate = () => {
                         // autoAdjustHeight -- removed so that textbox does not affect Chrome
                         disabled={!generatedResult}
                         onChange={handleTextFieldChange}
-                        style={{  width: '1000px',  margin: 'auto' }}
+                        style={{  width: '1000px', margin: 'auto' }}
                     />
                     </div>
 
