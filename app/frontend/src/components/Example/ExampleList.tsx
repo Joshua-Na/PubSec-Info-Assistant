@@ -12,7 +12,7 @@ export type ExampleModel = {
 
 const EXAMPLES: ExampleModel[] = [
     { text: "Find Standard clauses for PPVC requirement", value: "Find Standard clauses for PPVC requirement" },
-    { text: "List public space related requirements in Residential TCOTs", value: "List public space related requirements in Residential TCOTs" },
+    { text: "List public space related requirements in Jurong Lake District", value: "List public space related requirements in Jurong Lake District" },
     { text: "List all TCOTs with DAP requirement", value: "List all TCOTs with DAP requirement" }
 ];
 

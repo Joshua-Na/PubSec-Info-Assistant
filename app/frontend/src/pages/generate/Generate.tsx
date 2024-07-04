@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, PrimaryButton, Toggle } from '@fluentui/react';
-import { Document, Packer, Paragraph } from 'docx';
+import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
 import styles from './Generate.module.css'; 
 
@@ -124,13 +124,15 @@ const Generate = () => {
     };
 
     const downloadDocx = () => {
+        const paragraphs = textFieldValue.split('\n').map(line => new Paragraph({
+            children: [new TextRun(line)],
+        }));
+
         const doc = new Document({
             sections: [
                 {
                     properties: {},
-                    children: [
-                        new Paragraph(textFieldValue),
-                    ],
+                    children: paragraphs,
                 },
             ],
         });
@@ -157,7 +159,7 @@ const Generate = () => {
                         style={{  width: '500px' }}
                     />
                     <TextField
-                        label="Site Type"
+                        label="Land Use"
                         name="sitetype"
                         value={searchParams.sitetype}
                         onChange={handleInputChange}
@@ -165,7 +167,7 @@ const Generate = () => {
                         style={{  width: '500px' }}
                     />
                     <TextField
-                        label="Location"
+                        label="Planning Area"
                         name="location"
                         value={searchParams.location}
                         onChange={handleInputChange}
@@ -197,7 +199,7 @@ const Generate = () => {
                         //readOnly // Assuming this field is not meant to be edited by the user
                         // placeholder="Generated Text"
                         multiline
-                        autoAdjustHeight
+                        // autoAdjustHeight -- removed so that textbox does not affect Chrome
                         disabled={!generatedResult}
                         onChange={handleTextFieldChange}
                         style={{  width: '1000px',  margin: 'auto' }}

@@ -449,7 +449,7 @@ const Chat = () => {
                         )}
                         <QuestionInput
                             clearOnSend
-                            placeholder="Type a new question (e.g. What are the guidelines for a Child Care Centre in a residential site??)"
+                            placeholder="Type a new question (e.g. What are the guidelines for a Child Care Centre in a residential site?)"
                             disabled={isLoading}
                             onSend={question => makeApiRequest(question, defaultApproach, {}, {}, {})}
                             onAdjustClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)}
