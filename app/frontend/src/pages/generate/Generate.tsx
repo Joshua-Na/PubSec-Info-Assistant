@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, PrimaryButton, Toggle } from '@fluentui/react';
+import { Document, Packer, Paragraph } from 'docx';
+import { saveAs } from 'file-saver';
+import styles from './Generate.module.css'; 
 
 
 const Generate = () => {
@@ -22,7 +25,6 @@ const Generate = () => {
     const [showGradioSetting, setShowGradioSetting] = useState(false);
     const [gradioURL, setGradioURL] = useState<string | null>(null);
 
-    // Update textFieldValue when generatedResult changes
     useEffect(() => {
         setTextFieldValue(generatedResult);
     }, [generatedResult]);
@@ -121,77 +123,114 @@ const Generate = () => {
 
     };
 
+    const downloadDocx = () => {
+        const doc = new Document({
+            sections: [
+                {
+                    properties: {},
+                    children: [
+                        new Paragraph(textFieldValue),
+                    ],
+                },
+            ],
+        });
+
+        // Generate DOCX file from the document
+        Packer.toBlob(doc).then(blob => {
+            // Use FileSaver to save the generated Blob
+            saveAs(blob, "export.docx");
+        });
+    }
+
+        return (
+            <div>
+                <h1 style={{ textAlign: "center" }}>TCOT Generator</h1>
+
+                <form onSubmit={handleSubmit} >
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                    <TextField
+                        label="Category Name"
+                        name="category_name"
+                        value={searchParams.category_name}
+                        onChange={handleInputChange}
+                        placeholder="eg. 4.2 Land Use and Quantum"
+                        style={{  width: '500px' }}
+                    />
+                    <TextField
+                        label="Site Type"
+                        name="sitetype"
+                        value={searchParams.sitetype}
+                        onChange={handleInputChange}
+                        placeholder="eg. RESIDENTIAL"
+                        style={{  width: '500px' }}
+                    />
+                    <TextField
+                        label="Location"
+                        name="location"
+                        value={searchParams.location}
+                        onChange={handleInputChange}
+                        placeholder="eg. Upper Thomson"
+                        style={{  width: '500px' }}
+                    />
+                    <TextField
+                        label="Prompt: Specify details you are looking for e.g. ECDC"
+                        name="search_prompt_txt"
+                        value={searchParams.search_prompt_txt}
+                        onChange={handleInputChange}
+                        placeholder="eg. Early Childhood Development"
+                        style={{  width: '500px' }}
+                    />
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '20px'  }}>
+                        <PrimaryButton text="Submit" onClick={handleSubmit} allowDisabledFocus />
+                    </div>
+
+                    <h5 style={{ textAlign: "center", marginTop: '20px' }}>
+    Generator Status: {isGeneratingResult ? <span style={{ color: '#FF8C00' }}>Processing</span> : <span style={{ color: 'darkgreen' }}>Ready</span>}
+</h5>
+
+                    <h5 style={{ textAlign: "center", marginTop: '20px'  }}>TCOT DRAFT EDITOR</h5>
+
+                    <TextField
+                        name="generated_txt"
+                        value={textFieldValue}
+                        //readOnly // Assuming this field is not meant to be edited by the user
+                        // placeholder="Generated Text"
+                        multiline
+                        autoAdjustHeight
+                        disabled={!generatedResult}
+                        onChange={handleTextFieldChange}
+                        style={{  width: '1000px',  margin: 'auto' }}
+                    />
+                    </div>
 
 
-    return (
-        <div>
-            <h1 style={{ textAlign: "center" }}>TCOT Generator</h1>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop:'10px' }}>
+                        <PrimaryButton onClick={downloadDocx}>Download Docx</PrimaryButton>
+                    </div>
+                </form>
 
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    label="Category Name"
-                    name="category_name"
-                    value={searchParams.category_name}
-                    onChange={handleInputChange}
-                    placeholder="Category Name"
-                />
-                <TextField
-                    label="Site Type"
-                    name="sitetype"
-                    value={searchParams.sitetype}
-                    onChange={handleInputChange}
-                    placeholder="Site Type"
-                />
-                <TextField
-                    label="Location"
-                    name="location"
-                    value={searchParams.location}
-                    onChange={handleInputChange}
-                    placeholder="Location"
-                />
-                <TextField
-                    label="Prompt: Specify details you are looking for e.g. ECDC"
-                    name="search_prompt_txt"
-                    value={searchParams.search_prompt_txt}
-                    onChange={handleInputChange}
-                    placeholder="Search Prompt Text"
-                />
-                <h5 style={{ textAlign: "center" }}>TCOT Generation Status: {isGeneratingResult ? 'Generating...' : 'Idle'}</h5>
-                <TextField
-                    label="TCOTs DRAFT EDITOR"
-                    name="generated_txt"
-                    value={textFieldValue}
-                    //readOnly // Assuming this field is not meant to be edited by the user
-                    placeholder="Generated Text"
-                    multiline
-                    autoAdjustHeight
-                    disabled={!generatedResult}
-                    onChange={handleTextFieldChange}
-                />
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <PrimaryButton text="Submit" onClick={handleSubmit} allowDisabledFocus />
-                </div>
-            </form>
+                <hr />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Toggle label="Show Setting" onText="On" offText="Off" onChange={handleToggleChange} />
+                        {
+                            showGradioSetting ?
+                                <>
+                                    <TextField
+                                        label="Gradio URL"
+                                        name="gradioURL"
+                                        value={gradioURL ?? ''}
+                                        onChange={(e, newValue) => setGradioURL(newValue || null)}
+                                        placeholder="Gradio URL"
+                                        style={{  width: '300px',  margin: 'auto' }}
+                                    />
+                                </> :
+                                <>
+                                </>
+                        }
+                        </div>
+            </div>
+        );
+    };
 
-            <hr />
-            <Toggle label="Show Setting" onText="On" offText="Off" onChange={handleToggleChange} />
-            {
-                showGradioSetting ? 
-                <>
-                <TextField
-                    label="Gradio URL"
-                    name="gradioURL"
-                    value={gradioURL ?? ''}
-                    onChange={(e, newValue) => setGradioURL(newValue || null)}
-                    placeholder="Gradio URL"
-                />
-                </> : 
-                <>
-                </>
-            }
-
-        </div>
-    );
-};
-
-export default Generate;
+    export default Generate;
